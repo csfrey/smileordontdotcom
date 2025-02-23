@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: PeckhamPress;
+  src: local("PeckhamPress"), url("./assets/fonts/PeckhamPress.ttf");
+}
+
+@font-face {
+  font-family: RubikDirt;
+  src: local("RubikDirt"), url("./assets/fonts/RubikDirt.ttf");
+}
+
+@theme {
+  --font-peckham: PeckhamPress, "sans-serif";
+  --font-rubik: RubikDirt, "sans-serif";
+}
+
+body {
+  background-color: #fcd612;
+}
