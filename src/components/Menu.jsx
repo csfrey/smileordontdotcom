@@ -2,16 +2,19 @@ import { IoIosMenu } from "react-icons/io";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
-const MenuItem = ({ className, sub, children }) => {
+const MenuItem = ({ className, children, sub, to, onClick }) => {
   return (
-    <div
-      className={`hover:translate-x-4 transition cursor-pointer ${
-        sub ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"
-      } ${className}`}
-    >
-      {children}
-    </div>
+    <Link to={to} onClick={onClick}>
+      <div
+        className={`hover:translate-x-4 transition cursor-pointer ${
+          sub ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"
+        } ${className}`}
+      >
+        {children}
+      </div>
+    </Link>
   );
 };
 
@@ -30,7 +33,7 @@ const Menu = () => {
         {isOpen && (
           <motion.div
             key="vignette"
-            className="absolute w-screen h-screen z-20 bg-black"
+            className="fixed w-screen h-screen z-20 bg-black"
             onClick={() => setIsOpen(false)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
@@ -43,6 +46,7 @@ const Menu = () => {
       <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
+            key="menu-slideout"
             className="fixed bg-[#fcd612] sm:w-md w-sm h-screen z-30 top-0 left-0 p-8 font-peckham"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
@@ -54,14 +58,38 @@ const Menu = () => {
               onClick={() => setIsOpen(false)}
             />
             <div className="flex flex-col space-y-12">
-              <MenuItem>About</MenuItem>
-              <MenuItem>Contact</MenuItem>
+              <MenuItem to="/about" onClick={() => setIsOpen(false)}>
+                About
+              </MenuItem>
+              <MenuItem to="/contact" onClick={() => setIsOpen(false)}>
+                Contact
+              </MenuItem>
               <div>
-                <MenuItem>Collections</MenuItem>
+                <MenuItem to="/collections" onClick={() => setIsOpen(false)}>
+                  Collections
+                </MenuItem>
                 <div className="flex flex-col space-y-4 mt-4">
-                  <MenuItem sub>Subject</MenuItem>
-                  <MenuItem sub>Landscape</MenuItem>
-                  <MenuItem sub>Street</MenuItem>
+                  <MenuItem
+                    sub
+                    to="/collections/subject"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Subject
+                  </MenuItem>
+                  <MenuItem
+                    sub
+                    to="/collections/landscape"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Landscape
+                  </MenuItem>
+                  <MenuItem
+                    sub
+                    to="/collections/street"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Street
+                  </MenuItem>
                 </div>
               </div>
             </div>

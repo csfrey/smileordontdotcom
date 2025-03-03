@@ -1,31 +1,17 @@
 import { useState } from "react";
-import Carousel from "./Carousel";
+import Carousel from "../components/Carousel";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { images } from "../constants";
 
-const images = [
-  "landscape1.JPG",
-  "landscape2.JPG",
-  "landscape3.JPG",
-  "landscape4.JPG",
-  "landscape5.JPG",
-  "landscape6.JPG",
-  "subject1.JPG",
-  "subject2.JPG",
-  "subject3.JPG",
-  "subject4.JPG",
-  "subject5.JPG",
-  "subject6.JPG",
-].map((i) => `/images/${i}`);
-
-const Collection = ({ children, bg, to }) => {
+const CollectionLink = ({ children, bg, to }) => {
   return (
     <Link
       to={to}
       className="relative flex justify-center rounded-lg cursor-pointer max-w-xl mx-auto"
     >
       <img src={bg} height={200} className="rounded-lg" />
-      <div className="absolute rounded-lg w-full h-full transition opacity-50 hover:opacity-80 bg-black"></div>
+      <div className="absolute rounded-lg w-full h-full transition opacity-50 hover:opacity-70 bg-black"></div>
       <div className="absolute top-1/2 transform -translate-y-1/2 text-white font-peckham text-4xl">
         {children}
       </div>
@@ -38,9 +24,9 @@ const Home = () => {
     <div className="grow mb-20">
       <div className="flex justify-center mt-20">
         <motion.div
-          initial={{ opacity: 0, y: "20%" }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+        // initial={{ opacity: 0, y: "20%" }}
+        // animate={{ opacity: 1, y: 0 }}
+        // transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <Carousel>
             {images.map((image, i) => (
@@ -60,15 +46,21 @@ const Home = () => {
       </section>
 
       <section className="mt-24">
-        <Collection bg={images[7]}>SUBJECT</Collection>
+        <CollectionLink to="/collections/subject" bg={images[7]}>
+          SUBJECT
+        </CollectionLink>
       </section>
 
       <section className="mt-24">
-        <Collection bg={images[3]}>LANDSCAPE</Collection>
+        <CollectionLink to="/collections/landscape" bg={images[3]}>
+          LANDSCAPE
+        </CollectionLink>
       </section>
 
       <section className="mt-24">
-        <Collection bg={images[8]}>STREET</Collection>
+        <CollectionLink to="/collections/street" bg={images[8]}>
+          STREET
+        </CollectionLink>
       </section>
     </div>
   );
