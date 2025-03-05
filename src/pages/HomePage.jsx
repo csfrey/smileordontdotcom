@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Carousel from "../components/Carousel";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { images } from "../constants";
+import { images as fallbackImages } from "../constants";
+import { useImgur } from "../lib/imgur";
 
 const CollectionLink = ({ children, bg, to }) => {
   return (
@@ -20,20 +21,46 @@ const CollectionLink = ({ children, bg, to }) => {
 };
 
 const Home = () => {
+  const { carousel } = useImgur();
+
   return (
     <div className="grow mb-20">
       <div className="flex justify-center mt-20">
-        <motion.div
-        // initial={{ opacity: 0, y: "20%" }}
-        // animate={{ opacity: 1, y: 0 }}
-        // transition={{ duration: 0.5, ease: "easeInOut" }}
-        >
-          <Carousel>
-            {images.map((image, i) => (
-              <img src={image} key={`home-image-${i}`} height={200} />
-            ))}
-          </Carousel>
-        </motion.div>
+        <AnimatePresence mode="wait">
+          {carousel.isLoading ? (
+            <motion.div
+              className="flex flex-col justify-center h-64 font-peckham"
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "50%" }}
+            >
+              LOADING...
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: "20%" }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {carousel.isError ? (
+                <Carousel>
+                  {fallbackImages.map((image, i) => (
+                    <img src={image} key={`home-image-${i}`} height={200} />
+                  ))}
+                </Carousel>
+              ) : (
+                <Carousel>
+                  {carousel.data.data.images.map((image, i) => (
+                    <img
+                      src={image.link}
+                      key={`home-image-${i}`}
+                      height={200}
+                    />
+                  ))}
+                </Carousel>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <section className="mt-24 sm:my-48">
@@ -46,22 +73,22 @@ const Home = () => {
       </section>
 
       <section className="mt-24">
-        <CollectionLink to="/collections/subject" bg={images[7]}>
+        <CollectionLink to="/collections/subject" bg={fallbackImages[7]}>
           SUBJECT
         </CollectionLink>
       </section>
 
       <section className="mt-24">
-        <CollectionLink to="/collections/landscape" bg={images[3]}>
+        <CollectionLink to="/collections/landscape" bg={fallbackImages[3]}>
           LANDSCAPE
         </CollectionLink>
       </section>
 
-      <section className="mt-24">
+      {/* <section className="mt-24">
         <CollectionLink to="/collections/street" bg={images[8]}>
           STREET
         </CollectionLink>
-      </section>
+      </section> */}
     </div>
   );
 };
