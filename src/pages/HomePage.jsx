@@ -26,41 +26,11 @@ const Home = () => {
   return (
     <div className="grow mb-20">
       <div className="flex justify-center mt-20">
-        <AnimatePresence mode="wait">
-          {carousel.isLoading ? (
-            <motion.div
-              className="flex flex-col justify-center h-64 font-peckham"
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "50%" }}
-            >
-              LOADING...
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: "20%" }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              {carousel.isError ? (
-                <Carousel>
-                  {fallbackImages.map((image, i) => (
-                    <img src={image} key={`home-image-${i}`} height={200} />
-                  ))}
-                </Carousel>
-              ) : (
-                <Carousel>
-                  {carousel.data.data.images.map((image, i) => (
-                    <img
-                      src={image.link}
-                      key={`home-image-${i}`}
-                      height={200}
-                    />
-                  ))}
-                </Carousel>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Carousel>
+          {fallbackImages.map((image, i) => (
+            <img src={image} key={`home-image-${i}`} height={200} />
+          ))}
+        </Carousel>
       </div>
 
       <section className="mt-24 sm:my-48">
@@ -71,7 +41,12 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      <section className="font-peckham">
+        <div className="text-center text-3xl">CONTACT</div>
+        <div className="text-center mt-4">732 491 6228</div>
+        <div className="text-center">{"casey@smileordont.com"}</div>
+      </section>
+      {/* 
       <section className="mt-24">
         <CollectionLink to="/collections/subject" bg={fallbackImages[7]}>
           SUBJECT
@@ -82,7 +57,7 @@ const Home = () => {
         <CollectionLink to="/collections/landscape" bg={fallbackImages[3]}>
           LANDSCAPE
         </CollectionLink>
-      </section>
+      </section> */}
 
       {/* <section className="mt-24">
         <CollectionLink to="/collections/street" bg={images[8]}>

@@ -24,7 +24,7 @@ const Menu = () => {
   return (
     <>
       <div
-        className="fixed top-6 left-6 text-5xl cursor-pointer z-30 hover:"
+        className="fixed top-6 left-6 text-5xl cursor-pointer z-30 "
         onClick={() => setIsOpen(true)}
       >
         <IoIosMenu className="" />

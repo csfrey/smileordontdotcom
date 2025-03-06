@@ -23,22 +23,29 @@ const Carousel = ({ children, className }) => {
     isPlaying ? delay : null
   );
 
+  // function pausePlaying() {
+  //   setIsPlaying(false);
+  //   setTimeout(() => {
+  //     setIsPlaying(true);
+  //   }, 5000);
+  // }
+
   // Start dragging: record the initial pointer position
-  const handlePointerDown = (e) => {
+  function handlePointerDown(e) {
     setIsPlaying(false);
     setDragStartX(e.clientX);
-  };
+  }
 
   // Update the drag delta as the user moves their pointer
-  const handlePointerMove = (e) => {
+  function handlePointerMove(e) {
     if (dragStartX !== null) {
       const delta = e.clientX - dragStartX;
       setDragDelta(delta);
     }
-  };
+  }
 
   // When the drag ends, decide if the swipe was strong enough to change slides
-  const handlePointerUp = () => {
+  function handlePointerUp() {
     if (dragStartX !== null) {
       if (dragDelta > swipeThreshold) {
         // Dragged right: show previous slide
@@ -51,14 +58,14 @@ const Carousel = ({ children, className }) => {
     // Reset drag state
     setDragStartX(null);
     setDragDelta(0);
-  };
+  }
 
   // If the pointer leaves the container while dragging, treat it as the end of a drag
-  const handlePointerLeave = () => {
+  function handlePointerLeave() {
     if (dragStartX !== null) {
       handlePointerUp();
     }
-  };
+  }
 
   return (
     <div
@@ -70,7 +77,7 @@ const Carousel = ({ children, className }) => {
       onPointerLeave={handlePointerLeave}
       style={{ touchAction: "pan-y" }} // Allow vertical scrolling on touch devices
     >
-      <div className="grow overflow-hidden rounded-lg">
+      <div className="grow overflow-hidden sm:rounded-lg">
         <div
           className="flex transition-transform duration-300 ease-out"
           // During dragging, we add the delta to the computed translation
