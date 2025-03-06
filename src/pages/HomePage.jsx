@@ -3,7 +3,7 @@ import Carousel from "../components/Carousel";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { images as fallbackImages } from "../constants";
-import { useImgur } from "../lib/imgur";
+// import { useImgur } from "../lib/imgur";
 
 const CollectionLink = ({ children, bg, to }) => {
   return (
@@ -21,7 +21,7 @@ const CollectionLink = ({ children, bg, to }) => {
 };
 
 const Home = () => {
-  const { carousel } = useImgur();
+  // const { carousel } = useImgur();
 
   return (
     <div className="grow mb-20">
