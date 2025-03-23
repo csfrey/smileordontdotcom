@@ -11,17 +11,17 @@ import { FaInstagram } from "react-icons/fa";
 function App() {
   return (
     <div className="min-h-screen min-w-[375px] flex flex-col antialiased">
-      {/* <Menu /> */}
+      <Menu />
       <a href="https://www.instagram.com/callmecaseyy_/" target="_blank">
-        <FaInstagram className="fixed top-6 left-6 text-5xl cursor-pointer z-30 " />
+        <FaInstagram className="fixed top-6 right-6 text-5xl cursor-pointer z-30 " />
       </a>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/collections" element={<CollectionsPage />} />
-        <Route path="/collections/:collection" element={<CollectionsPage />} /> */}
+        <Route path="/collections/:collection" element={<CollectionsPage />} />
       </Routes>
       <Footer />
     </div>

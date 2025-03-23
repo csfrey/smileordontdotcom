@@ -74,21 +74,21 @@ const Menu = () => {
                     to="/collections/subject"
                     onClick={() => setIsOpen(false)}
                   >
-                    Subject
+                    SUBJECT
                   </MenuItem>
                   <MenuItem
                     sub
                     to="/collections/landscape"
                     onClick={() => setIsOpen(false)}
                   >
-                    Landscape
+                    LANDSCAPE
                   </MenuItem>
                   <MenuItem
                     sub
                     to="/collections/street"
                     onClick={() => setIsOpen(false)}
                   >
-                    Street
+                    PERFORMANCE
                   </MenuItem>
                 </div>
               </div>
