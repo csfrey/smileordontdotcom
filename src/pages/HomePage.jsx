@@ -53,7 +53,7 @@ const Home = () => {
 
       {!musicQuery.isLoading && (
         <section className="mt-24">
-          <CollectionLink to="/collections/landscape" bg={musicQuery.data[0]}>
+          <CollectionLink to="/collections/music" bg={musicQuery.data[0]}>
             LIVE MUSIC
           </CollectionLink>
         </section>
