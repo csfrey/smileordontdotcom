@@ -1,8 +1,30 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const ContactPage = () => {
   const [sent, setSent] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          console.log("Email successfully sent!", result.text);
+          setSent(true);
+        },
+        (error) => {
+          console.error("Failed to send email.", error);
+        }
+      );
+  };
 
   return (
     <div className="grow flex justify-center">
@@ -15,57 +37,68 @@ const ContactPage = () => {
               Thanks for your message
             </div>
           ) : (
-            <motion.div className="flex flex-col space-y-4" animate={{}}>
+            <motion.form
+              className="flex flex-col space-y-4"
+              onSubmit={sendEmail}
+              animate={{}}
+            >
               <div>
-                <label for="name" className="font-peckham">
+                <label htmlFor="name" className="font-peckham">
                   NAME
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   className="w-full border rounded bg-white p-0.5"
+                  required
                 />
               </div>
 
               <div>
-                <label for="phonenumber" className="font-peckham">
+                <label htmlFor="phone" className="font-peckham">
                   PHONE (OPTIONAL)
                 </label>
                 <input
-                  id="phonenumber"
+                  id="phone"
+                  name="phone"
                   type="text"
                   className="w-full border rounded bg-white p-0.5"
                 />
               </div>
 
               <div>
-                <label for="email" className="font-peckham">
+                <label htmlFor="email" className="font-peckham">
                   EMAIL
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   className="w-full border rounded bg-white p-0.5"
+                  required
                 />
               </div>
 
               <div>
-                <label for="message" className="font-peckham">
+                <label htmlFor="message" className="font-peckham">
                   MESSAGE
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   className="w-full border rounded bg-white p-0.5"
+                  required
                 />
               </div>
               <button
+                type="submit"
                 className="bg-gray-950 hover:bg-gray-800 active:bg-gray-700 text-white font-peckham rounded"
-                onClick={() => setSent(true)}
               >
                 SEND
               </button>
-            </motion.div>
+            </motion.form>
           )}
         </AnimatePresence>
       </div>

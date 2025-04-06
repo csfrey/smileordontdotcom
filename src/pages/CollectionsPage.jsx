@@ -74,7 +74,7 @@ const CollectionsPage = () => {
     setTouchEnd(null);
   };
 
-  if (!collection) {
+  if (collection !== "subject" && collection !== "landscape") {
     return (
       <div className="grid lg:grid-cols-2">
         {!subjectQuery.isLoading && (
@@ -100,6 +100,9 @@ const CollectionsPage = () => {
 
   return (
     <>
+      <div className="text-center mt-16 text-4xl font-peckham">
+        {collection}
+      </div>
       <div className="p-1 sm:p-16 grid gap-1 sm:gap-16 lg:grid-cols-3">
         {photos.map((p, index) => (
           <img
@@ -110,7 +113,7 @@ const CollectionsPage = () => {
             onClick={
               !isSmallScreen ? () => setActiveImageIndex(index) : undefined
             }
-            className="cursor-pointer"
+            className="sm:cursor-pointer hover:brightness-75"
           />
         ))}
       </div>
