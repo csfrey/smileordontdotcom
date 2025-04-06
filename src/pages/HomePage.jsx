@@ -8,7 +8,8 @@ import { useImages } from "../lib/images";
 import CollectionLink from "../components/CollectionLink";
 
 const Home = () => {
-  const { carouselQuery, subjectQuery, landscapeQuery } = useImages();
+  const { carouselQuery, subjectQuery, landscapeQuery, musicQuery } =
+    useImages();
 
   return (
     <div className="grow mb-20">
@@ -46,6 +47,14 @@ const Home = () => {
             bg={landscapeQuery.data[0]}
           >
             LANDSCAPE
+          </CollectionLink>
+        </section>
+      )}
+
+      {!musicQuery.isLoading && (
+        <section className="mt-24">
+          <CollectionLink to="/collections/landscape" bg={musicQuery.data[0]}>
+            LIVE MUSIC
           </CollectionLink>
         </section>
       )}
