@@ -6,7 +6,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 
 const CollectionsPage = () => {
   const { collection } = useParams();
-  const { subjectQuery, landscapeQuery } = useImages();
+  const { subjectQuery, landscapeQuery, musicQuery } = useImages();
   const [activeImageIndex, setActiveImageIndex] = useState(null);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -30,6 +30,9 @@ const CollectionsPage = () => {
       return subjectQuery.isLoading ? [] : subjectQuery.data;
     if (collection === "landscape")
       return landscapeQuery.isLoading ? [] : landscapeQuery.data;
+    if (collection === "music")
+      return musicQuery.isLoading ? [] : musicQuery.data;
+
     return [];
   }, [collection, subjectQuery.isLoading, landscapeQuery.isLoading]);
 
@@ -74,7 +77,11 @@ const CollectionsPage = () => {
     setTouchEnd(null);
   };
 
-  if (collection !== "subject" && collection !== "landscape") {
+  if (
+    collection !== "subject" &&
+    collection !== "landscape" &&
+    collection !== "music"
+  ) {
     return (
       <div className="grid lg:grid-cols-2">
         {!subjectQuery.isLoading && (
@@ -100,7 +107,7 @@ const CollectionsPage = () => {
 
   return (
     <>
-      <div className="text-center mt-16 text-4xl font-peckham">
+      <div className="text-center mt-16 text-5xl font-peckham">
         {collection}
       </div>
       <div className="p-1 sm:p-16 grid gap-1 sm:gap-16 lg:grid-cols-3">
@@ -113,7 +120,7 @@ const CollectionsPage = () => {
             onClick={
               !isSmallScreen ? () => setActiveImageIndex(index) : undefined
             }
-            className="sm:cursor-pointer hover:brightness-75"
+            className="sm:cursor-pointer sm:hover:brightness-75"
           />
         ))}
       </div>

@@ -42,9 +42,15 @@ export function useImages() {
     queryFn: getImages("landscape"),
   });
 
+  const musicQuery = useQuery({
+    queryKey: ["music"],
+    queryFn: getImages("live_music"),
+  });
+
   return {
     carouselQuery,
     subjectQuery,
     landscapeQuery,
+    musicQuery,
   };
 }
