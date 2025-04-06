@@ -83,13 +83,13 @@ const Menu = () => {
                   >
                     Landscape
                   </MenuItem>
-                  <MenuItem
+                  {/* <MenuItem
                     sub
                     to="/collections/street"
                     onClick={() => setIsOpen(false)}
                   >
                     Street
-                  </MenuItem>
+                  </MenuItem> */}
                 </div>
               </div>
             </div>

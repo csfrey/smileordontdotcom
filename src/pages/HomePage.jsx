@@ -3,34 +3,23 @@ import Carousel from "../components/Carousel";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { images as fallbackImages } from "../constants";
-// import { useImgur } from "../lib/imgur";
-
-const CollectionLink = ({ children, bg, to }) => {
-  return (
-    <Link
-      to={to}
-      className="relative flex justify-center rounded-lg cursor-pointer max-w-xl mx-auto"
-    >
-      <img src={bg} height={200} className="rounded-lg" />
-      <div className="absolute rounded-lg w-full h-full transition opacity-50 hover:opacity-70 bg-black"></div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 text-white font-peckham text-4xl">
-        {children}
-      </div>
-    </Link>
-  );
-};
+import { useQuery } from "@tanstack/react-query";
+import { useImages } from "../lib/images";
+import CollectionLink from "../components/CollectionLink";
 
 const Home = () => {
-  // const { carousel } = useImgur();
+  const { carouselQuery, subjectQuery, landscapeQuery } = useImages();
 
   return (
     <div className="grow mb-20">
       <div className="flex justify-center mt-20">
-        <Carousel>
-          {fallbackImages.map((image, i) => (
-            <img src={image} key={`home-image-${i}`} height={200} />
-          ))}
-        </Carousel>
+        {!carouselQuery.isLoading && (
+          <Carousel>
+            {carouselQuery.data.map((image, i) => (
+              <img src={image} key={`home-image-${i}`} height={200} />
+            ))}
+          </Carousel>
+        )}
       </div>
 
       <section className="mt-24 sm:my-48">
@@ -41,29 +30,31 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="font-peckham">
+
+      {!subjectQuery.isLoading && (
+        <section className="mt-24">
+          <CollectionLink to="/collections/subject" bg={subjectQuery.data[0]}>
+            SUBJECT
+          </CollectionLink>
+        </section>
+      )}
+
+      {!landscapeQuery.isLoading && (
+        <section className="mt-24">
+          <CollectionLink
+            to="/collections/landscape"
+            bg={landscapeQuery.data[0]}
+          >
+            LANDSCAPE
+          </CollectionLink>
+        </section>
+      )}
+
+      <section className="font-peckham mt-24">
         <div className="text-center text-3xl">CONTACT</div>
         <div className="text-center mt-4">732 491 6228</div>
         <div className="text-center">{"casey@smileordont.com"}</div>
       </section>
-      {/* 
-      <section className="mt-24">
-        <CollectionLink to="/collections/subject" bg={fallbackImages[7]}>
-          SUBJECT
-        </CollectionLink>
-      </section>
-
-      <section className="mt-24">
-        <CollectionLink to="/collections/landscape" bg={fallbackImages[3]}>
-          LANDSCAPE
-        </CollectionLink>
-      </section> */}
-
-      {/* <section className="mt-24">
-        <CollectionLink to="/collections/street" bg={images[8]}>
-          STREET
-        </CollectionLink>
-      </section> */}
     </div>
   );
 };
