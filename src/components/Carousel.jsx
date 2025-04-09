@@ -70,7 +70,7 @@ const Carousel = ({ children, className }) => {
   return (
     <div
       ref={containerRef}
-      className={`relative w-full max-w-xl ${className}`}
+      className={`relative w-full max-w-3xl ${className}`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}

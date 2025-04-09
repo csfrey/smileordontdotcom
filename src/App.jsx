@@ -13,7 +13,7 @@ function App() {
     <div className="min-h-screen min-w-[375px] flex flex-col antialiased">
       <Menu />
       <a href="https://www.instagram.com/callmecaseyy_/" target="_blank">
-        <FaInstagram className="fixed top-6 right-6 text-5xl cursor-pointer z-30 " />
+        <FaInstagram className="fixed top-6 right-6 text-5xl cursor-pointer z-25 " />
       </a>
       <Header />
       <div className="grow">

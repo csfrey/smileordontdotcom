@@ -83,7 +83,7 @@ const CollectionsPage = () => {
     collection !== "music"
   ) {
     return (
-      <div className="grid lg:grid-cols-2">
+      <div className="mb-8">
         {!subjectQuery.isLoading && (
           <section className="mt-18 lg:mt-24">
             <CollectionLink to="/collections/subject" bg={subjectQuery.data[0]}>
@@ -97,6 +97,13 @@ const CollectionsPage = () => {
               to="/collections/landscape"
               bg={landscapeQuery.data[0]}
             >
+              LANDSCAPE
+            </CollectionLink>
+          </section>
+        )}
+        {!landscapeQuery.isLoading && (
+          <section className="mt-18 lg:mt-24">
+            <CollectionLink to="/collections/music" bg={musicQuery.data[0]}>
               LANDSCAPE
             </CollectionLink>
           </section>

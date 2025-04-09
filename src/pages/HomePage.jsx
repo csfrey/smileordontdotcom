@@ -13,11 +13,11 @@ const Home = () => {
 
   return (
     <div className="grow mb-20">
-      <div className="flex justify-center mt-20">
+      <div className="flex justify-center mt-10">
         {!carouselQuery.isLoading && (
           <Carousel>
             {carouselQuery.data.map((image, i) => (
-              <img src={image} key={`home-image-${i}`} height={200} />
+              <img src={image} key={`home-image-${i}`} height={800} />
             ))}
           </Carousel>
         )}
@@ -60,7 +60,11 @@ const Home = () => {
       )}
 
       <section className="font-peckham mt-24">
-        <div className="text-center text-3xl">CONTACT</div>
+        <div className="flex justify-center">
+          <Link to="/contact" className="text-3xl">
+            CONTACT
+          </Link>
+        </div>
         <div className="text-center mt-4">732 491 6228</div>
         <div className="text-center">{"casey@smileordont.com"}</div>
       </section>
